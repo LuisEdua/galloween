@@ -43,6 +43,11 @@ public class TypeOfTripAvailableServiceImpl implements ITypeOfTripAvailableServi
     }
 
     @Override
+    public TypeOfTripAvailable findById(Long id) {
+        return findAndEnsureExist(id);
+    }
+
+    @Override
     public void delete(Long id) {
         repository.delete(findAndEnsureExist(id));
     }

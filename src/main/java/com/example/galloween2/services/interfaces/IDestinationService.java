@@ -9,7 +9,8 @@ import java.util.List;
 
 public interface IDestinationService {
 
-//    CreateDestinationResponse create(CreateDestinationRequest request);
+//}
+// CreateDestinationResponse create(CreateDestinationRequest request);
     CreateDestinationResponse create(String city, String state, String country, MultipartFile file);
 
     CreateDestinationResponse get(Long id);

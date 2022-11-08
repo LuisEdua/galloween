@@ -2,6 +2,7 @@ package com.example.galloween2.services.interfaces;
 
 import com.example.galloween2.controllers.dtos.request.CreateTypeOfTripAvailableRequest;
 import com.example.galloween2.controllers.dtos.responses.CreateTypeOfTripAvailableResponse;
+import com.example.galloween2.entities.TypeOfTripAvailable;
 
 import java.util.List;
 
@@ -13,6 +14,8 @@ public interface ITypeOfTripAvailableService {
     List<CreateTypeOfTripAvailableResponse> list();
 
     CreateTypeOfTripAvailableResponse update(Long id, CreateTypeOfTripAvailableRequest request);
+
+    TypeOfTripAvailable findById(Long id);
 
     void delete(Long id);
 }

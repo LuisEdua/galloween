@@ -11,7 +11,9 @@ import com.example.galloween2.entities.projections.DestinationProjection;
 import com.example.galloween2.repositories.ICommentRepository;
 import com.example.galloween2.repositories.IDestinationTypeOfTripAvailableRepository;
 import com.example.galloween2.services.interfaces.ICommentService;
+import com.example.galloween2.services.interfaces.IDestinationService;
 import com.example.galloween2.services.interfaces.IDestinationTypeOfTripAvailableService;
+import com.example.galloween2.services.interfaces.ITypeOfTripAvailableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,10 @@ import java.util.stream.Collectors;
 public class DestinationTypeOfTripAvailableServiceImpl implements IDestinationTypeOfTripAvailableService {
     @Autowired
     private IDestinationTypeOfTripAvailableRepository repository;
-
+    @Autowired
+    private IDestinationService destinationService;
+    @Autowired
+    private ITypeOfTripAvailableService typeOfTripAvailableService;
 
     @Override
     public CreateDestinationTypeOfTripAvailableResponse create(CreateDestinationTypeOfTripAvailableRequest request) {
@@ -67,14 +72,17 @@ public class DestinationTypeOfTripAvailableServiceImpl implements IDestinationTy
     }
 
     private DestinationTypeOfTripAvailable from(CreateDestinationTypeOfTripAvailableRequest request){
-        DestinationTypeOfTripAvailable destinationTypeOfTripAvailable = new DestinationTypeOfTripAvailable();
-
-        return destinationTypeOfTripAvailable;
+        DestinationTypeOfTripAvailable available = new DestinationTypeOfTripAvailable();
+        available.setTypeOfTripAvailable(typeOfTripAvailableService.findById(request.getTypeOfTrip()));
+        available.setDestination(destinationService.findById(request.getDestination()));
+        return available;
     }
 
-    private CreateDestinationTypeOfTripAvailableResponse from(DestinationTypeOfTripAvailable destinationTypeOfTripAvailable){
+    private CreateDestinationTypeOfTripAvailableResponse from(DestinationTypeOfTripAvailable available){
         CreateDestinationTypeOfTripAvailableResponse response = new CreateDestinationTypeOfTripAvailableResponse();
-
+        response.setId(available.getId());
+        response.setTypeOfTrip(available.getTypeOfTripAvailable().getId());
+        response.setDestination(available.getDestination().getId());
         return response;
     }
 
