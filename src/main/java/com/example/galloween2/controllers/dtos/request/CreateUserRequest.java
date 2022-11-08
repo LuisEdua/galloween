@@ -10,5 +10,4 @@ public class CreateUserRequest {
     private String password;
     private Integer age;
     private Long cellphone;
-    private Long role;
 }

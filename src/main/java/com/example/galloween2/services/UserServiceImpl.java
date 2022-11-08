@@ -24,8 +24,8 @@ public class UserServiceImpl implements IUserService {
     private IRoleService roleService;
 
     @Override
-    public CreateUserResponse create(CreateUserRequest request) {
-        User save = repository.save(from(request));
+    public CreateUserResponse create(CreateUserRequest request, Long role) {
+        User save = repository.save(from(request, role));
 
         return from(save);
     }
@@ -83,14 +83,14 @@ public class UserServiceImpl implements IUserService {
         return repository.findUserByEmailAndPassword(request.getEmail(), request.getPassword());
     }
 
-    private User from(CreateUserRequest request) {
+    private User from(CreateUserRequest request, Long role) {
         User user = new User();
         user.setFullName(request.getFullName());
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
         user.setAge(request.getAge());
         user.setCellphone(request.getCellphone());
-        user.setRole(roleService.findById(request.getRole()));
+        user.setRole(roleService.findById(role));
         return user;
     }
 

@@ -9,7 +9,7 @@ import com.example.galloween2.entities.User;
 import java.util.List;
 
 public interface IUserService {
-    CreateUserResponse create(CreateUserRequest request);
+    CreateUserResponse create(CreateUserRequest request, Long role);
 
     CreateUserResponse get(Long id);
 

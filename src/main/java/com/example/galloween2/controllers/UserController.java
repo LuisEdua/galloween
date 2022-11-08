@@ -16,9 +16,9 @@ public class UserController {
     @Autowired
     private IUserService service;
 
-    @PostMapping
-    public CreateUserResponse create(@RequestBody CreateUserRequest request) {
-        return service.create(request);
+    @PostMapping("{role}")
+    public CreateUserResponse create(@RequestBody CreateUserRequest request, @PathVariable Long role) {
+        return service.create(request, role);
     }
 
     @GetMapping("validate")
