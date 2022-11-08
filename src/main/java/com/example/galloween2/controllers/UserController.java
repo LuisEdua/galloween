@@ -2,6 +2,7 @@ package com.example.galloween2.controllers;
 
 import com.example.galloween2.controllers.dtos.request.CreateUserRequest;
 import com.example.galloween2.controllers.dtos.request.ValidateUserRequest;
+import com.example.galloween2.controllers.dtos.responses.BaseResponse;
 import com.example.galloween2.controllers.dtos.responses.CreateUserResponse;
 import com.example.galloween2.controllers.dtos.responses.ValidateUserResponse;
 import com.example.galloween2.services.interfaces.IUserService;
@@ -17,12 +18,12 @@ public class UserController {
     private IUserService service;
 
     @PostMapping("{role}")
-    public CreateUserResponse create(@RequestBody CreateUserRequest request, @PathVariable Long role) {
+    public BaseResponse create(@RequestBody CreateUserRequest request, @PathVariable Long role) {
         return service.create(request, role);
     }
 
-    @GetMapping("validate")
-    public ValidateUserResponse validate(@RequestBody ValidateUserRequest request){ return service.validate(request);}
+    @PostMapping("validate")
+    public BaseResponse validate(@RequestBody ValidateUserRequest request){ return service.validate(request);}
 
     @GetMapping("{id}")
     public CreateUserResponse get(@PathVariable Long id) {

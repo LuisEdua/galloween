@@ -2,16 +2,18 @@ package com.example.galloween2.services;
 
 import com.example.galloween2.controllers.dtos.request.CreateUserRequest;
 import com.example.galloween2.controllers.dtos.request.ValidateUserRequest;
+import com.example.galloween2.controllers.dtos.responses.BaseResponse;
 import com.example.galloween2.controllers.dtos.responses.CreateUserResponse;
 import com.example.galloween2.controllers.dtos.responses.ValidateUserResponse;
+import com.example.galloween2.controllers.exceptions.UserValidateException;
 import com.example.galloween2.entities.User;
 import com.example.galloween2.entities.projections.UserProjection;
 import com.example.galloween2.repositories.IUserRepository;
 import com.example.galloween2.services.interfaces.IRoleService;
 import com.example.galloween2.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import java.util.Objects;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,10 +26,16 @@ public class UserServiceImpl implements IUserService {
     private IRoleService roleService;
 
     @Override
-    public CreateUserResponse create(CreateUserRequest request, Long role) {
-        User save = repository.save(from(request, role));
+    public BaseResponse create(CreateUserRequest request, Long role) {
+        User user = from(request, role);
 
-        return from(save);
+
+            return BaseResponse.builder()
+                    .data(from(repository.save(user)))
+                    .message("User created correctly")
+                    .success(Boolean.TRUE)
+                    .httpStatus(HttpStatus.CREATED).build();
+
     }
 
     @Override
@@ -65,8 +73,17 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public ValidateUserResponse validate(ValidateUserRequest request) {
-        return from(from(request));
+    public BaseResponse validate(ValidateUserRequest request) {
+        UserProjection user =from(request);
+        try {
+        return BaseResponse.builder()
+                .data(from(user))
+                .message("User validated correctly")
+                .success(Boolean.TRUE)
+                .httpStatus(HttpStatus.CREATED).build();
+        } catch (Exception e) {
+            throw new UserValidateException("User not found");
+        }
     }
 
     private ValidateUserResponse from(UserProjection projection) {
