@@ -1,13 +1,13 @@
 package com.example.galloween2.services;
 
 import com.example.galloween2.controllers.dtos.request.CreateCommentRequest;
-import com.example.galloween2.controllers.dtos.responses.CreateCommentResponse;
+import com.example.galloween2.controllers.dtos.responses.CommentResponse;
 import com.example.galloween2.entities.Comment;
-import com.example.galloween2.entities.User;
 import com.example.galloween2.repositories.ICommentRepository;
 import com.example.galloween2.services.interfaces.ICommentService;
 import com.example.galloween2.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,34 +18,25 @@ public class CommentServiceImpl implements ICommentService {
     @Autowired
     private ICommentRepository repository;
 
-    /*@Autowired
-    private IClientService clientService;*/
-
+    @Lazy
     @Autowired
     private IUserService userService;
 
     @Override
-    public CreateCommentResponse create(CreateCommentRequest request, Long id) {
-        Comment save = repository.save(from(request));
+    public CommentResponse create(CreateCommentRequest request, Long id) {
+        Comment save = repository.save(from(request, id));
 
         return from(save);
     }
-
     @Override
-    public CreateCommentResponse get(Long id) {
-        Comment comment = findAndEnsureExist(id);
-        return from(comment);
-    }
-
-    @Override
-    public List<CreateCommentResponse> list() {
+    public List<CommentResponse> list() {
         return repository.findAll().stream()
                 .map(this::from)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public CreateCommentResponse update(Long id, CreateCommentRequest request) {
+    public CommentResponse update(Long id, CreateCommentRequest request) {
         Comment comment = findAndEnsureExist(id);
         comment.setComment(request.getComment());
         comment.setDate(request.getDate());
@@ -57,29 +48,23 @@ public class CommentServiceImpl implements ICommentService {
         repository.delete(findAndEnsureExist(id));
     }
 
-    private Comment from(CreateCommentRequest request){
+    @Override
+    public void deleteByUser(Long id){repository.deleteByUserId(id);}
+
+    private Comment from(CreateCommentRequest request, Long id){
         Comment comment = new Comment();
         comment.setComment(request.getComment());
         comment.setDate(request.getDate());
-        /*Client client = clientService.findById(request.getUserId());
-        comment.setClient(client);*/
-        User user = userService.findById(request.getUserId());
-        comment.setUser(user);
-
-
-
+        comment.setUser(userService.findById(id));
         return comment;
     }
 
-    private CreateCommentResponse from(Comment comment){
-        CreateCommentResponse response = new CreateCommentResponse();
+    private CommentResponse from(Comment comment){
+        CommentResponse response = new CommentResponse();
         response.setId(comment.getId());
         response.setComment(comment.getComment());
         response.setDate(comment.getDate());
-        /*Client client = comment.getClient();
-        response.setUserId(client.getId());*/
-        User user = comment.getUser();
-        response.setUserId(user.getId());
+        response.setUser(comment.getUser().getFullName());
         return response;
     }
 

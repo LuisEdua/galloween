@@ -10,8 +10,8 @@ import java.util.List;
 
 @Repository
 public interface ITicketBusRepository extends JpaRepository<TicketBus, Long> {
-    @Query(value = "select * from tickets_buses " +
-    "where destination_id = :destinationId and reservation_id is null;", nativeQuery = true)
+    @Query(value = "SELECT * FROM tickets_buses " +
+    "WHERE destination_id = :destinationId AND reservation_id IS NULL;", nativeQuery = true)
     List<TicketBusProjection> findTicketsByDestination(Long destinationId);
 
 }

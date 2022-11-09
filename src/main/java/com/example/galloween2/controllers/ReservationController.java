@@ -20,19 +20,14 @@ public class ReservationController {
         return service.create(request, user_id);
     }
 
-    /**@GetMapping("{id}")
-    public CreateReservationResponse get(@PathVariable Long id) {
-        return service.get(id);
-    }
-
-    @GetMapping
-    public List<CreateReservationResponse> list() {
-        return service.list();
+    @GetMapping("{userId}")
+    public List<CreateReservationResponse> list(@PathVariable Long userId) {
+        return service.list(userId);
     }
 
     @PutMapping("{id}")
     public CreateReservationResponse update(@PathVariable Long id, @RequestBody CreateReservationRequest request) {
         return service.update(id, request);
-    }**/
+    }
 }
 

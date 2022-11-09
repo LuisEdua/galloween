@@ -29,12 +29,6 @@ public class ReservationStatusServiceImpl implements IReservationStatusService {
     }
 
     @Override
-    public CreateReservationStatusResponse get(Long id) {
-        ReservationStatus reservationStatus = findAndEnsureExist(id);
-        return from(reservationStatus);
-    }
-
-    @Override
     public List<CreateReservationStatusResponse> list() {
         return repository.findAll().stream()
                 .map(this::from)

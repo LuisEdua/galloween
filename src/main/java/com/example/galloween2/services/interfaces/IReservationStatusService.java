@@ -9,8 +9,6 @@ import java.util.List;
 public interface IReservationStatusService {
     CreateReservationStatusResponse create(Reservation reservation);
 
-    CreateReservationStatusResponse get(Long id);
-
     List<CreateReservationStatusResponse> list();
 
     CreateReservationStatusResponse update(Long id, CreateReservationStatusRequest request);

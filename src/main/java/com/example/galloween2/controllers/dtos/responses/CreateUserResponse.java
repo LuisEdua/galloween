@@ -12,4 +12,5 @@ public class CreateUserResponse {
     private String password;
     private Integer age;
     private Long cellphone;
+    private String role;
 }

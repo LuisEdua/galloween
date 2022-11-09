@@ -1,20 +1,16 @@
 package com.example.galloween2.services;
 
-import com.example.galloween2.controllers.dtos.request.CreateCommentRequest;
 import com.example.galloween2.controllers.dtos.request.CreateDestinationTypeOfTripAvailableRequest;
-import com.example.galloween2.controllers.dtos.responses.CreateCommentResponse;
 import com.example.galloween2.controllers.dtos.responses.CreateDestinationTypeOfTripAvailableResponse;
 import com.example.galloween2.controllers.dtos.responses.DestinationTypeOfTripAvailableResponse;
-import com.example.galloween2.entities.Comment;
 import com.example.galloween2.entities.pivots.DestinationTypeOfTripAvailable;
 import com.example.galloween2.entities.projections.DestinationProjection;
-import com.example.galloween2.repositories.ICommentRepository;
 import com.example.galloween2.repositories.IDestinationTypeOfTripAvailableRepository;
-import com.example.galloween2.services.interfaces.ICommentService;
 import com.example.galloween2.services.interfaces.IDestinationService;
 import com.example.galloween2.services.interfaces.IDestinationTypeOfTripAvailableService;
 import com.example.galloween2.services.interfaces.ITypeOfTripAvailableService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,8 +20,12 @@ import java.util.stream.Collectors;
 public class DestinationTypeOfTripAvailableServiceImpl implements IDestinationTypeOfTripAvailableService {
     @Autowired
     private IDestinationTypeOfTripAvailableRepository repository;
+
+    @Lazy
     @Autowired
     private IDestinationService destinationService;
+
+    @Lazy
     @Autowired
     private ITypeOfTripAvailableService typeOfTripAvailableService;
 

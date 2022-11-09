@@ -10,8 +10,6 @@ public class CreateReservationResponse {
     private Long id;
     private String reservationDate;
     private Long cost;
-    private List<Long> ticketAirplanes;
-    private List<Long> ticketBuses;
-    private List<Long> ticketCruiceShips;
-    /*private Long client;*/
+    private String status;
+    private String user;
 }

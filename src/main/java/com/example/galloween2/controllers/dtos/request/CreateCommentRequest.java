@@ -7,5 +7,4 @@ import lombok.Setter;
 public class CreateCommentRequest {
     private String comment;
     private String date;
-    private Long userId;
 }

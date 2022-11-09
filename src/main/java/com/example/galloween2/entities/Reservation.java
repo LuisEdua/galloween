@@ -20,7 +20,7 @@ public class Reservation {
     private Long cost;
 
     @ManyToOne
-    @JoinColumn(name="user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     @OneToOne(mappedBy = "reservation")

@@ -9,13 +9,13 @@ import java.util.List;
 public interface IReservationService {
     CreateReservationResponse create(CreateReservationRequest request, Long user_id);
 
-    CreateReservationResponse get(Long id);
-
-    List<CreateReservationResponse> list();
+    List<CreateReservationResponse> list(Long id);
 
     CreateReservationResponse update(Long id, CreateReservationRequest request);
 
     void delete(Long id);
 
     Reservation finById(Long id);
+
+    void userNullAll(Long id, Long idUser);
 }

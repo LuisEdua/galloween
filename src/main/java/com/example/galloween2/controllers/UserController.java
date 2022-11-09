@@ -25,21 +25,6 @@ public class UserController {
     @PostMapping("validate")
     public BaseResponse validate(@RequestBody ValidateUserRequest request){ return service.validate(request);}
 
-    @GetMapping("{id}")
-    public CreateUserResponse get(@PathVariable Long id) {
-        return service.get(id);
-    }
-
-    @GetMapping
-    public List<CreateUserResponse> list() {
-        return service.list();
-    }
-
-    @PutMapping("{id}")
-    public CreateUserResponse update(@PathVariable Long id, @RequestBody CreateUserRequest request) {
-        return service.update(id, request);
-    }
-
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);

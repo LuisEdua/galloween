@@ -7,5 +7,4 @@ import lombok.Setter;
 public class CreateReservationRequest {
     private String reservationDate;
     private Long cost;
-    /*private Long client;*/
 }

@@ -4,9 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class CreateCommentResponse {
+public class CommentResponse {
     private Long id;
     private String comment;
     private String date;
-    private Long userId;
+    private String user;
 }

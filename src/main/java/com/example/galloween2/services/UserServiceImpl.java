@@ -9,9 +9,12 @@ import com.example.galloween2.controllers.exceptions.UserValidateException;
 import com.example.galloween2.entities.User;
 import com.example.galloween2.entities.projections.UserProjection;
 import com.example.galloween2.repositories.IUserRepository;
+import com.example.galloween2.services.interfaces.ICommentService;
+import com.example.galloween2.services.interfaces.IReservationService;
 import com.example.galloween2.services.interfaces.IRoleService;
 import com.example.galloween2.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +25,18 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements IUserService {
     @Autowired
     private IUserRepository repository;
+
+    @Lazy
     @Autowired
     private IRoleService roleService;
+
+    @Lazy
+    @Autowired
+    private ICommentService commentService;
+
+    @Lazy
+    @Autowired
+    private IReservationService reservationService;
 
     @Override
     public BaseResponse create(CreateUserRequest request, Long role) {
@@ -39,31 +52,9 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public CreateUserResponse get(Long id) {
-        User user = findAndEnsureExist(id);
-        return from(user);
-    }
-
-    @Override
-    public List<CreateUserResponse> list() {
-        return repository.findAll().stream()
-                .map(this::from)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public CreateUserResponse update(Long id, CreateUserRequest request) {
-        User user = findAndEnsureExist(id);
-        user.setFullName(request.getFullName());
-        user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
-        user.setAge(request.getAge());
-        user.setCellphone(request.getCellphone());
-        return from(repository.save(user));
-    }
-
-    @Override
     public void delete(Long id) {
+        reservationService.userNullAll(id, null);
+        commentService.deleteByUser(id);
         repository.delete(findAndEnsureExist(id));
     }
 
@@ -119,6 +110,7 @@ public class UserServiceImpl implements IUserService {
         response.setPassword(user.getPassword());
         response.setAge(user.getAge());
         response.setCellphone(user.getCellphone());
+        response.setRole(user.getRole().getRole());
         return response;
     }
 

@@ -10,9 +10,9 @@ import java.util.List;
 
 @Repository
 public interface IDestinationTypeOfTripAvailableRepository extends JpaRepository<DestinationTypeOfTripAvailable, Long> {
-    @Query(value = "select destinations.* from destination_type_of_trip_availables " +
-            "inner join destinations on destinations.id=destination_type_of_trip_availables.destination_id " +
-            "inner join types_of_trips_availables on types_of_trips_availables.id=destination_type_of_trip_availables.type_of_trip_available_id "+
-            "where types_of_trips_availables.type_of_trip = :typeOfTrip ;", nativeQuery = true)
+    @Query(value = "SELECT destinations.* FROM destination_type_of_trip_availables " +
+            "INNER JOIN destinations ON destinations.id=destination_type_of_trip_availables.destination_id " +
+            "INNER JOIN types_of_trips_availables ON types_of_trips_availables.id=destination_type_of_trip_availables.type_of_trip_available_id "+
+            "WHERE types_of_trips_availables.type_of_trip = :typeOfTrip ;", nativeQuery = true)
     List<DestinationProjection> desinationsList(String typeOfTrip);
 }

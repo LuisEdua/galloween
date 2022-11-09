@@ -20,24 +20,5 @@ public class RoleController {
         return service.create(request);
     }
 
-    @GetMapping("{id}")
-    public CreateRoleResponse get(@PathVariable Long id) {
-        return service.get(id);
-    }
-
-    @GetMapping
-    public List<CreateRoleResponse> list() {
-        return service.list();
-    }
-
-    @PutMapping("{id}")
-    public CreateRoleResponse update(@PathVariable Long id, @RequestBody CreateRoleRequest request) {
-        return service.update(id, request);
-    }
-
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
-        service.delete(id);
-    }
 }
 

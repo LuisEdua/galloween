@@ -7,6 +7,7 @@ import com.example.galloween2.repositories.IDestinationRepository;
 import com.example.galloween2.services.interfaces.IDestinationService;
 import com.example.galloween2.services.interfaces.IFileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,6 +19,7 @@ public class DestinationServiceImpl implements IDestinationService {
     @Autowired
     private IDestinationRepository repository;
 
+    @Lazy
     @Autowired
     private IFileService fileService;
 

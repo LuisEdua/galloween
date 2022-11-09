@@ -11,11 +11,6 @@ import java.util.List;
 public interface IUserService {
     BaseResponse create(CreateUserRequest request, Long role);
 
-    CreateUserResponse get(Long id);
-
-    List<CreateUserResponse> list();
-
-    CreateUserResponse update(Long id, CreateUserRequest request);
 
     void delete(Long id);
 

@@ -2,13 +2,14 @@ package com.example.galloween2.services;
 
 import com.example.galloween2.controllers.dtos.request.CreateReservationRequest;
 import com.example.galloween2.controllers.dtos.responses.CreateReservationResponse;
+import com.example.galloween2.controllers.dtos.responses.CreateReservationStatusResponse;
 import com.example.galloween2.entities.Reservation;
 import com.example.galloween2.repositories.IReservationRepository;
-import com.example.galloween2.services.interfaces.IPaymentService;
 import com.example.galloween2.services.interfaces.IReservationService;
 import com.example.galloween2.services.interfaces.IReservationStatusService;
 import com.example.galloween2.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,9 +22,11 @@ public class ReservationServiceImpl implements IReservationService {
     @Autowired
     private IReservationRepository repository;
 
+    @Lazy
     @Autowired
     private IReservationStatusService reservationStatusService;
 
+    @Lazy
     @Autowired
     private IUserService userService;
 
@@ -34,25 +37,16 @@ public class ReservationServiceImpl implements IReservationService {
     }
 
     @Override
-    public CreateReservationResponse get(Long id) {
-        Reservation reservation = findAndEnsureExist(id);
-        return from(reservation);
-    }
-
-    @Override
-    public List<CreateReservationResponse> list() {
-        return repository.findAll().stream()
-                .map(this::from)
+    public List<CreateReservationResponse> list(Long id) {
+        return repository.findReservationByUserId(id)
+                .stream().map(this::from)
                 .collect(Collectors.toList());
     }
 
     @Override
     public CreateReservationResponse update(Long id, CreateReservationRequest request) {
         Reservation reservation = findAndEnsureExist(id);
-        reservation.setReservationDate(request.getReservationDate());
         reservation.setCost(reservation.getCost());
-        /*Client client = clientService.findById(request.getClient());
-        reservation.setClient(client);*/
         return from(repository.save(reservation));
     }
 
@@ -66,20 +60,28 @@ public class ReservationServiceImpl implements IReservationService {
         return findAndEnsureExist(id);
     }
 
+    @Override
+    public void userNullAll(Long id, Long userId) {
+        repository.userNull(id, userId);
+    }
+
+
     private Reservation from(CreateReservationRequest request, Long user_id){
         Reservation reservation = new Reservation();
-        reservation.setReservationDate(request.getReservationDate());
-        reservation.setCost(reservation.getCost());
         reservation.setUser(userService.findById(user_id));
+        reservation.setReservationDate(request.getReservationDate());
+        reservation.setCost(request.getCost());
         return reservation;
     }
 
     private CreateReservationResponse from(Reservation reservation){
-        reservationStatusService.create(reservation);
+        CreateReservationStatusResponse statusResponse= reservationStatusService.create(reservation);
         CreateReservationResponse response = new CreateReservationResponse();
         response.setId(reservation.getId());
         response.setCost(reservation.getCost());
         response.setReservationDate(reservation.getReservationDate());
+        response.setStatus(statusResponse.getStatus());
+        response.setUser(reservation.getUser().getFullName());
         return response;
     }
 
