@@ -11,4 +11,5 @@ public class CreateTicketCruiseShipRequest {
     private String origin;
     private String checkInTime;
     private Long cost;
+    private Long destination;
 }

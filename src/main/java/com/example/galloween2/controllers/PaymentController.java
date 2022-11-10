@@ -22,13 +22,8 @@ private IPaymentService service;
     }
 
     @GetMapping("{id}")
-    public CreatePaymentResponse get(@PathVariable Long id) {
-        return service.get(id);
-    }
-
-    @GetMapping
-    public List<CreatePaymentResponse> list() {
-        return service.list();
+    public List<CreatePaymentResponse> listPaymentByUser(@PathVariable Long id) {
+        return service.list(id);
     }
 
     @PutMapping("{id}")

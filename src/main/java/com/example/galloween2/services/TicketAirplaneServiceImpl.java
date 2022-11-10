@@ -5,6 +5,7 @@ import com.example.galloween2.controllers.dtos.responses.CreateTicketAirplaneRes
 import com.example.galloween2.entities.TicketAirplane;
 import com.example.galloween2.entities.projections.TicketAirplaneProjection;
 import com.example.galloween2.repositories.ITicketAirplaneRepository;
+import com.example.galloween2.services.interfaces.IDestinationService;
 import com.example.galloween2.services.interfaces.IReservationService;
 import com.example.galloween2.services.interfaces.ITicketAirplaneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class TicketAirplaneServiceImpl implements ITicketAirplaneService {
     private ITicketAirplaneRepository repository;
     @Autowired
     private IReservationService reservationService;
+    @Autowired
+    private IDestinationService destinationService;
 
     @Override
     public CreateTicketAirplaneResponse create(CreateTicketAirplaneRequest request) {
@@ -65,6 +68,11 @@ public class TicketAirplaneServiceImpl implements ITicketAirplaneService {
         repository.delete(findAndEnsureExist(id));
     }
 
+    @Override
+    public List<Long> getCost(Long id) {
+        return repository.findCostByUserId(id);
+    }
+
     private TicketAirplane from(CreateTicketAirplaneRequest request){
         TicketAirplane ticketAirplane = new TicketAirplane();
         ticketAirplane.setDepartureDate(request.getDepartureDate());
@@ -73,6 +81,7 @@ public class TicketAirplaneServiceImpl implements ITicketAirplaneService {
         ticketAirplane.setClass_type(request.getClass_type());
         ticketAirplane.setSeatNumber(request.getSeatNumber());
         ticketAirplane.setCost(request.getCost());
+        ticketAirplane.setDestination(destinationService.findById(request.getDestination()));
         return ticketAirplane;
     }
 

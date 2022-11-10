@@ -6,5 +6,4 @@ import lombok.Setter;
 @Getter @Setter
 public class CreateReservationRequest {
     private String reservationDate;
-    private Long cost;
 }

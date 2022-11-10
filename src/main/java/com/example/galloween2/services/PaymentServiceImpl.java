@@ -30,15 +30,9 @@ public class PaymentServiceImpl implements IPaymentService {
     }
 
     @Override
-    public CreatePaymentResponse get(Long id) {
-        Payment payment = findAndEnsureExist(id);
-        return from(payment);
-    }
-
-    @Override
-    public List<CreatePaymentResponse> list() {
-        return repository.findAll().stream()
-                .map(this::from)
+    public List<CreatePaymentResponse> list(Long id) {
+        return repository.findPaymentByUserId(id)
+                .stream().map(this::from)
                 .collect(Collectors.toList());
     }
 

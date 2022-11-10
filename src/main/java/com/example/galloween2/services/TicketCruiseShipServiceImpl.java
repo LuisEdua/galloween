@@ -5,6 +5,7 @@ import com.example.galloween2.controllers.dtos.responses.CreateTicketCruiseShipR
 import com.example.galloween2.entities.TicketCruiseShip;
 import com.example.galloween2.entities.projections.TicketAirplaneProjection;
 import com.example.galloween2.repositories.ITicketCruiseShipRepository;
+import com.example.galloween2.services.interfaces.IDestinationService;
 import com.example.galloween2.services.interfaces.IReservationService;
 import com.example.galloween2.services.interfaces.ITicketCruiseShipService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class TicketCruiseShipServiceImpl implements ITicketCruiseShipService {
     private ITicketCruiseShipRepository repository;
     @Autowired
     private IReservationService reservationService;
+    @Autowired
+    private IDestinationService destinationService;
 
     @Override
     public CreateTicketCruiseShipResponse create(CreateTicketCruiseShipRequest request) {
@@ -65,6 +68,11 @@ public class TicketCruiseShipServiceImpl implements ITicketCruiseShipService {
         repository.delete(findAndEnsureExist(id));
     }
 
+    @Override
+    public List<Long> getCost(Long id) {
+        return repository.findCostByUserId(id);
+    }
+
     private TicketCruiseShip from(CreateTicketCruiseShipRequest request){
         TicketCruiseShip ticketCruiseShip = new TicketCruiseShip();
         ticketCruiseShip.setDepartureDate(request.getDepartureDate());
@@ -73,6 +81,7 @@ public class TicketCruiseShipServiceImpl implements ITicketCruiseShipService {
         ticketCruiseShip.setClass_type(request.getClass_type());
         ticketCruiseShip.setSeatNumber(request.getSeatNumber());
         ticketCruiseShip.setCost(request.getCost());
+        ticketCruiseShip.setDestination(destinationService.findById(request.getDestination()));
         return ticketCruiseShip;
     }
 

@@ -15,4 +15,6 @@ public interface ITicketCruiseShipService {
     CreateTicketCruiseShipResponse update(Long id, Long idReservation);
 
     void delete(Long id);
+
+    List<Long> getCost(Long id);
 }

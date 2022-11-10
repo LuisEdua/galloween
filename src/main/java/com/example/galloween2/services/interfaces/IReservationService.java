@@ -11,11 +11,13 @@ public interface IReservationService {
 
     List<CreateReservationResponse> list(Long id);
 
-    CreateReservationResponse update(Long id, CreateReservationRequest request);
+    Long update(Long id);
 
     void delete(Long id);
 
     Reservation finById(Long id);
 
-    void userNullAll(Long id, Long idUser);
+    void userNullAll(Long id);
+
+    List<CreateReservationResponse> listAll();
 }

@@ -15,4 +15,6 @@ public interface ITicketBusService {
     CreateTicketBusResponse update(Long id, Long reservation);
 
     void delete(Long id);
+
+    List<Long> getCost(Long id);
 }

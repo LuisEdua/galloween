@@ -17,5 +17,4 @@ public interface IUserRepository extends JpaRepository<User, Long> {
     "INNER JOIN roles ON users.role_id=roles.id " +
     "WHERE users.email = :email AND users.password = :password ;", nativeQuery = true)
     UserProjection findUserByEmailAndPassword(String email, String password);
-
 }

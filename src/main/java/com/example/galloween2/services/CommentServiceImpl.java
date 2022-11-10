@@ -48,9 +48,6 @@ public class CommentServiceImpl implements ICommentService {
         repository.delete(findAndEnsureExist(id));
     }
 
-    @Override
-    public void deleteByUser(Long id){repository.deleteByUserId(id);}
-
     private Comment from(CreateCommentRequest request, Long id){
         Comment comment = new Comment();
         comment.setComment(request.getComment());

@@ -13,4 +13,7 @@ public interface ITicketAirplaneRepository extends JpaRepository<TicketAirplane,
     @Query(value = "SELECT * FROM tickets_airplanes " +
             "WHERE destination_id = :destinationId AND reservation_id IS NULL;", nativeQuery = true)
     List<TicketAirplaneProjection> findTicketsByDestination(Long destinationId);
+
+    @Query(value = "SELECT cost FROM tickets_airplanes WHERE reservation_id = :id ;", nativeQuery = true)
+    List<Long> findCostByUserId(Long id);
 }

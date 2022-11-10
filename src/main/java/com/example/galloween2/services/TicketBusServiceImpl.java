@@ -67,6 +67,11 @@ public class TicketBusServiceImpl implements ITicketBusService {
         repository.delete(findAndEnsureExist(id));
     }
 
+    @Override
+    public List<Long> getCost(Long id){
+        return repository.findCostByUserId(id);
+    }
+
     private TicketBus from(CreateTicketBusRequest request){
         TicketBus ticketBus = new TicketBus();
         ticketBus.setCheckInTime(request.getCheckInTime());

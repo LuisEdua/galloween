@@ -14,5 +14,4 @@ public interface ICommentService {
 
     void delete(Long id);
 
-    void deleteByUser(Long id);
 }

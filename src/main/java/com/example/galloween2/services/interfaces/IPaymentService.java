@@ -9,9 +9,7 @@ import java.util.List;
 public interface IPaymentService {
     CreatePaymentResponse create(CreatePaymentRequest request, Long user_id);
 
-    CreatePaymentResponse get(Long id);
-
-    List<CreatePaymentResponse> list();
+    List<CreatePaymentResponse> list(Long id);
 
     CreatePaymentResponse update(Long id, CreatePaymentRequest request);
 

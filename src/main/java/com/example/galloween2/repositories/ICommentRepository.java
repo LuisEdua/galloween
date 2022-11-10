@@ -10,7 +10,4 @@ import java.util.List;
 @Repository
 public interface ICommentRepository extends JpaRepository<Comment, Long> {
 
-    @Query(value = "DELETE FROM comments WHERE user_id = :userId ;", nativeQuery = true)
-    void deleteByUserId(Long userId);
-
 }
