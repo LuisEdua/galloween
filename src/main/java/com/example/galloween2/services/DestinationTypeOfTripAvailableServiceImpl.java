@@ -49,11 +49,6 @@ public class DestinationTypeOfTripAvailableServiceImpl implements IDestinationTy
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public void delete(Long id) {
-        repository.delete(findAndEnsureExist(id));
-    }
-
     private DestinationTypeOfTripAvailableResponse from(DestinationProjection projection) {
         DestinationTypeOfTripAvailableResponse response = new DestinationTypeOfTripAvailableResponse();
         response.setCity(projection.getCity());

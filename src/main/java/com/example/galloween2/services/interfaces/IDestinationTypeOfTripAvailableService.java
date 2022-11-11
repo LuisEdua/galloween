@@ -13,5 +13,4 @@ public interface IDestinationTypeOfTripAvailableService {
 
     List<CreateDestinationTypeOfTripAvailableResponse> list();
 
-    void delete(Long id);
 }

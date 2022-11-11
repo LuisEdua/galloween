@@ -31,9 +31,5 @@ public class DestinationTypeOfTripAvailableController {
         return service.list();
     }
 
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
-        service.delete(id);
-    }
 }
 
