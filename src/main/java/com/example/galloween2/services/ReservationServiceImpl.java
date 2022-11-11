@@ -61,6 +61,7 @@ public class ReservationServiceImpl implements IReservationService {
         cost += getCostCruiseShip(id);
         Reservation reservation = findAndEnsureExist(id);
         reservation.setCost(cost);
+        repository.save(reservation);
         return cost;
     }
 

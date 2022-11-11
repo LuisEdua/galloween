@@ -36,13 +36,6 @@ public class TypeOfTripAvailableServiceImpl implements ITypeOfTripAvailableServi
     }
 
     @Override
-    public CreateTypeOfTripAvailableResponse update(Long id, CreateTypeOfTripAvailableRequest request) {
-        TypeOfTripAvailable typeOfTrip = findAndEnsureExist(id);
-        typeOfTrip.setTypeOfTrip(request.getTypeOfTrip());
-        return from(repository.save(typeOfTrip));
-    }
-
-    @Override
     public TypeOfTripAvailable findById(Long id) {
         return findAndEnsureExist(id);
     }

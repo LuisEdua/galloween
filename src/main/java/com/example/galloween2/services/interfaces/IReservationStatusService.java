@@ -11,11 +11,11 @@ public interface IReservationStatusService {
 
     CreateReservationStatusResponse findByReservation(Long id);
 
-    List<CreateReservationStatusResponse> list();
-
     CreateReservationStatusResponse update(Long id, CreateReservationStatusRequest request);
 
     void delete(Long id);
 
     void nullPayment(Long id);
+
+    CreateReservationStatusResponse get(Long idReservation);
 }

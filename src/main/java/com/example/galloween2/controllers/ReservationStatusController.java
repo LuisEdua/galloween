@@ -15,9 +15,9 @@ public class ReservationStatusController {
     @Autowired
     private IReservationStatusService service;
 
-    @GetMapping
-    public List<CreateReservationStatusResponse> list() {
-        return service.list();
+    @GetMapping("{idReservation}")
+    public CreateReservationStatusResponse get(@PathVariable Long idReservation) {
+        return service.get(idReservation);
     }
 
     @PutMapping("{id}")

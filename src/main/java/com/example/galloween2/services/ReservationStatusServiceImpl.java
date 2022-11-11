@@ -34,13 +34,6 @@ public class ReservationStatusServiceImpl implements IReservationStatusService {
     }
 
     @Override
-    public List<CreateReservationStatusResponse> list() {
-        return repository.findAll().stream()
-                .map(this::from)
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public CreateReservationStatusResponse update(Long id, CreateReservationStatusRequest request) {
         ReservationStatus reservationStatus = findAndEnsureExist(id);
         reservationStatus.setStatus(request.getStatus());
@@ -57,6 +50,11 @@ public class ReservationStatusServiceImpl implements IReservationStatusService {
     public void nullPayment(Long id){
         List<ReservationStatus> status = repository.findByPaymentId(id);
         status.stream().map(this::toNull).collect(Collectors.toList());
+    }
+
+    @Override
+    public CreateReservationStatusResponse get(Long idReservation) {
+        return from(repository.findByReservationId(idReservation));
     }
 
     private ReservationStatus toNull(ReservationStatus status) {

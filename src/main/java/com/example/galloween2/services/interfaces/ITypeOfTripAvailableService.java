@@ -13,8 +13,6 @@ public interface ITypeOfTripAvailableService {
 
     List<CreateTypeOfTripAvailableResponse> list();
 
-    CreateTypeOfTripAvailableResponse update(Long id, CreateTypeOfTripAvailableRequest request);
-
     TypeOfTripAvailable findById(Long id);
 
     void delete(Long id);
