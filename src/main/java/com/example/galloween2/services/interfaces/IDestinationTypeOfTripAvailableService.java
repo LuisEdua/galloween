@@ -13,7 +13,5 @@ public interface IDestinationTypeOfTripAvailableService {
 
     List<CreateDestinationTypeOfTripAvailableResponse> list();
 
-    CreateDestinationTypeOfTripAvailableResponse update(Long id, CreateDestinationTypeOfTripAvailableRequest request);
-
     void delete(Long id);
 }

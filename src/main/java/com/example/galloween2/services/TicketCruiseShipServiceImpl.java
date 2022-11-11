@@ -78,7 +78,7 @@ public class TicketCruiseShipServiceImpl implements ITicketCruiseShipService {
         ticketCruiseShip.setDepartureDate(request.getDepartureDate());
         ticketCruiseShip.setCheckInTime(request.getCheckInTime());
         ticketCruiseShip.setOrigin(request.getOrigin());
-        ticketCruiseShip.setClass_type(request.getClass_type());
+        ticketCruiseShip.setClass_type(request.getClassType());
         ticketCruiseShip.setSeatNumber(request.getSeatNumber());
         ticketCruiseShip.setCost(request.getCost());
         ticketCruiseShip.setDestination(destinationService.findById(request.getDestination()));

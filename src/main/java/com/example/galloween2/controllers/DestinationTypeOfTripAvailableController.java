@@ -31,11 +31,6 @@ public class DestinationTypeOfTripAvailableController {
         return service.list();
     }
 
-    @PutMapping("{id}")
-    public CreateDestinationTypeOfTripAvailableResponse update(@PathVariable Long id, @RequestBody CreateDestinationTypeOfTripAvailableRequest request) {
-        return service.update(id, request);
-    }
-
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);

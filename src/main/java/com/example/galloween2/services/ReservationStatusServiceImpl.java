@@ -53,6 +53,17 @@ public class ReservationStatusServiceImpl implements IReservationStatusService {
         repository.delete(findAndEnsureExist(id));
     }
 
+    @Override
+    public void nullPayment(Long id){
+        List<ReservationStatus> status = repository.findByPaymentId(id);
+        status.stream().map(this::toNull).collect(Collectors.toList());
+    }
+
+    private ReservationStatus toNull(ReservationStatus status) {
+        status.setPayment(null);
+        return repository.save(status);
+    }
+
     private ReservationStatus from(Reservation reservation){
         ReservationStatus reservationStatus = new ReservationStatus();
         reservationStatus.setStatus("No pagado");

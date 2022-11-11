@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface IPaymentRepository extends JpaRepository<Payment, Long> {
 
-    @Query(value = "SELECT payment_type from payments where user_id = :userId ;", nativeQuery = true)
+    @Query(value = "SELECT * from payments where user_id = :userId ;", nativeQuery = true)
     List<Payment> findPaymentByUserId(Long userId);
 }

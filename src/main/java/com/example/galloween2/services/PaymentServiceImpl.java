@@ -5,6 +5,7 @@ import com.example.galloween2.controllers.dtos.responses.CreatePaymentResponse;
 import com.example.galloween2.entities.Payment;
 import com.example.galloween2.repositories.IPaymentRepository;
 import com.example.galloween2.services.interfaces.IPaymentService;
+import com.example.galloween2.services.interfaces.IReservationStatusService;
 import com.example.galloween2.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -22,6 +23,10 @@ public class PaymentServiceImpl implements IPaymentService {
     @Autowired
     private IUserService userService;
 
+    @Lazy
+    @Autowired
+    private IReservationStatusService statusService;
+
     @Override
     public CreatePaymentResponse create(CreatePaymentRequest request, Long user_id) {
         Payment save = repository.save(from(request, user_id));
@@ -37,15 +42,20 @@ public class PaymentServiceImpl implements IPaymentService {
     }
 
     @Override
-    public CreatePaymentResponse update(Long id, CreatePaymentRequest request) {
-        Payment payment = findAndEnsureExist(id);
-        payment.setPaymentType(request.getPaymentType());
-        return from(repository.save(payment));
+    public void delete(Long id) {
+        statusService.nullPayment(id);
+        repository.delete(findAndEnsureExist(id));
     }
 
     @Override
-    public void delete(Long id) {
-        repository.delete(findAndEnsureExist(id));
+    public void findByUser(Long id){
+        List<Payment> payment = repository.findPaymentByUserId(id).stream().toList();
+        for(int i=0; i<payment.size(); i++)
+            toNull(payment.get(i));
+    }
+
+    private void toNull(Payment payment) {
+        statusService.nullPayment(payment.getId());
     }
 
     @Override

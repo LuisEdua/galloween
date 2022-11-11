@@ -8,7 +8,7 @@ public class CreateTicketAirplaneRequest {
     private String departureDate;
     private String checkInTime;
     private Long seatNumber;
-    private String class_type;
+    private String classType;
     private String origin;
     private Long cost;
     private Long Destination;

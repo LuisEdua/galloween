@@ -78,7 +78,7 @@ public class TicketAirplaneServiceImpl implements ITicketAirplaneService {
         ticketAirplane.setDepartureDate(request.getDepartureDate());
         ticketAirplane.setCheckInTime(request.getCheckInTime());
         ticketAirplane.setOrigin(request.getOrigin());
-        ticketAirplane.setClass_type(request.getClass_type());
+        ticketAirplane.setClass_type(request.getClassType());
         ticketAirplane.setSeatNumber(request.getSeatNumber());
         ticketAirplane.setCost(request.getCost());
         ticketAirplane.setDestination(destinationService.findById(request.getDestination()));

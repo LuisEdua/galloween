@@ -24,15 +24,16 @@ public class Destination {
 
     private String  photography;
 
-    @OneToMany(mappedBy = "destination")
+
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
     private List<TicketCruiseShip> ticketCruiseShips;
 
-    @OneToMany(mappedBy = "destination")
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
     private List<TicketAirplane> ticketAirplanes;
 
-    @OneToMany(mappedBy = "destination")
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
     private List<TicketBus> ticketBuses;
 
-    @OneToMany(mappedBy = "destination")
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
     private List<DestinationTypeOfTripAvailable> destinationTypeOfTripAvailables;
 }

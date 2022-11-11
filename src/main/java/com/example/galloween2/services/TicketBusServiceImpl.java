@@ -56,9 +56,9 @@ public class TicketBusServiceImpl implements ITicketBusService {
     }
 
     @Override
-    public CreateTicketBusResponse update(Long id, Long seat) {
+    public CreateTicketBusResponse update(Long id, Long reservation) {
         TicketBus ticketBus = findAndEnsureExist(id);
-        ticketBus.setSeatNumber(seat);
+        ticketBus.setReservation(reservationService.finById(reservation));
         return from(repository.save(ticketBus));
     }
 
@@ -78,7 +78,7 @@ public class TicketBusServiceImpl implements ITicketBusService {
         ticketBus.setOrigin(request.getOrigin());
         ticketBus.setCost(request.getCost());
         ticketBus.setDepartureDate(request.getDepartureDate());
-        ticketBus.setClass_type(request.getClass_type());
+        ticketBus.setClass_type(request.getClassType());
         ticketBus.setSeatNumber(request.getSeatNumber());
         ticketBus.setDestination(destinationService.findById(request.getDestination()));
         return ticketBus;

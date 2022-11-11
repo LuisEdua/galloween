@@ -11,9 +11,9 @@ public interface IPaymentService {
 
     List<CreatePaymentResponse> list(Long id);
 
-    CreatePaymentResponse update(Long id, CreatePaymentRequest request);
-
     void delete(Long id);
+
+    void findByUser(Long id);
 
     Payment findById(Long id);
 

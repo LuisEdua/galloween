@@ -53,6 +53,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void delete(Long id) {
         reservationService.userNullAll(id);
+        paymentService.findByUser(id);
         repository.delete(findAndEnsureExist(id));
     }
 

@@ -50,13 +50,6 @@ public class DestinationTypeOfTripAvailableServiceImpl implements IDestinationTy
     }
 
     @Override
-    public CreateDestinationTypeOfTripAvailableResponse update(Long id, CreateDestinationTypeOfTripAvailableRequest request) {
-        DestinationTypeOfTripAvailable destinationTypeOfTripAvailable = findAndEnsureExist(id);
-
-        return from(repository.save(destinationTypeOfTripAvailable));
-    }
-
-    @Override
     public void delete(Long id) {
         repository.delete(findAndEnsureExist(id));
     }

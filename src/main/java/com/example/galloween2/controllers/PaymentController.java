@@ -26,11 +26,6 @@ private IPaymentService service;
         return service.list(id);
     }
 
-    @PutMapping("{id}")
-    public CreatePaymentResponse update(@PathVariable Long id, @RequestBody CreatePaymentRequest request) {
-        return service.update(id, request);
-    }
-
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);
