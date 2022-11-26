@@ -24,7 +24,6 @@ public class Destination {
 
     private String  photography;
 
-
     @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
     private List<TicketCruiseShip> ticketCruiseShips;
 

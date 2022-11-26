@@ -12,4 +12,6 @@ public class CreateReservationResponse {
     private Long cost;
     private String status;
     private String user;
+    private String destination;
+    private String typeOfTrip;
 }

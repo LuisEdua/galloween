@@ -22,7 +22,7 @@ public class UserController {
         return service.create(request, role);
     }
 
-    @GetMapping("validate")
+    @PostMapping("validate")
     public BaseResponse validate(@RequestBody ValidateUserRequest request){ return service.validate(request);}
 
     @DeleteMapping("{id}")

@@ -7,6 +7,10 @@ import lombok.Setter;
 public class ValidateUserResponse {
     private Long id;
 
+    private String email;
+
+    private String Password;
+
     private String fullName;
 
     private Integer age;

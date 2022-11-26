@@ -10,4 +10,8 @@ public interface UserProjection {
     Long getUserCellphone();
 
     String getUserRole();
+
+    String getUserEmail();
+
+    String getUserPassword();
 }

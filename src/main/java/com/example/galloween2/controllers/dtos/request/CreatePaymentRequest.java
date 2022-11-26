@@ -5,5 +5,11 @@ import lombok.Setter;
 
 @Getter @Setter
 public class CreatePaymentRequest {
-    private String paymentType;
+    private String ownerName;
+
+    private Long cardNumber;
+
+    private Long cvv;
+
+    private String expirationDate;
 }

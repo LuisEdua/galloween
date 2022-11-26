@@ -14,7 +14,13 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String paymentType;
+    private String ownerName;
+
+    private Long cardNumber;
+
+    private Long cvv;
+
+    private String expirationDate;
 
     /*@OneToOne(mappedBy = "payment")
     private Reservation reservation;*/

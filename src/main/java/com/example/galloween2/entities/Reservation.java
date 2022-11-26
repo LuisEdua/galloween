@@ -19,6 +19,10 @@ public class Reservation {
 
     private Long cost;
 
+    private String destination;
+
+    private String typeOfTrip;
+
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;

@@ -6,4 +6,6 @@ import lombok.Setter;
 @Getter @Setter
 public class CreateReservationRequest {
     private String reservationDate;
+    private String destination;
+    private String typeOfTrip;
 }

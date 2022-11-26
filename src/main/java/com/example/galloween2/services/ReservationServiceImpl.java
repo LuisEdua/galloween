@@ -95,6 +95,7 @@ public class ReservationServiceImpl implements IReservationService {
         Reservation reservation = new Reservation();
         reservation.setUser(userService.findById(user_id));
         reservation.setReservationDate(request.getReservationDate());
+        reservation.setDestination(request.getDestination());
         return reservation;
     }
 
@@ -105,6 +106,8 @@ public class ReservationServiceImpl implements IReservationService {
         response.setReservationDate(reservation.getReservationDate());
         response.setStatus(reservationStatusService.findByReservation(reservation.getId()).getStatus());
         response.setUser(reservation.getUser().getFullName());
+        response.setDestination(reservation.getDestination());
+        response.setTypeOfTrip(reservation.getTypeOfTrip());
         return response;
     }
 

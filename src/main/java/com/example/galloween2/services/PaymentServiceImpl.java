@@ -65,7 +65,10 @@ public class PaymentServiceImpl implements IPaymentService {
 
     private Payment from (CreatePaymentRequest request, Long user_id){
         Payment payment = new Payment();
-        payment.setPaymentType(request.getPaymentType());
+        payment.setCardNumber(request.getCardNumber());
+        payment.setCvv(request.getCvv());
+        payment.setOwnerName(request.getOwnerName());
+        payment.setExpirationDate(request.getExpirationDate());
         payment.setUser(userService.findById(user_id));
         return payment;
     }
@@ -73,7 +76,10 @@ public class PaymentServiceImpl implements IPaymentService {
     private CreatePaymentResponse from (Payment payment){
         CreatePaymentResponse response = new CreatePaymentResponse();
         response.setId(payment.getId());
-        response.setPaymentType(payment.getPaymentType());
+        response.setCardNumber(payment.getCardNumber());
+        response.setOwnerName(payment.getOwnerName());
+        response.setCvv(payment.getCvv());
+        response.setExpirationDate(payment.getExpirationDate());
         return response;
     }
 

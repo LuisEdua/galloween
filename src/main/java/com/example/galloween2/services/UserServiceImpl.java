@@ -90,6 +90,8 @@ public class UserServiceImpl implements IUserService {
         response.setAge(projection.getUserAge());
         response.setCellphone(projection.getUserCellphone());
         response.setRole(projection.getUserRole());
+        response.setEmail(projection.getUserEmail());
+        response.setPassword(projection.getUserPassword());
         return response;
     }
 
