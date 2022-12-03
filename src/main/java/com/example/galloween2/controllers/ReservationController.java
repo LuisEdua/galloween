@@ -32,7 +32,10 @@ public class ReservationController {
 
     @PutMapping("{id}")
     public Long setCost(@PathVariable Long id) {
-        return service.update(id);
+        return service.getCost(id);
     }
+
+
+
 }
 

@@ -69,7 +69,7 @@ public class TicketBusServiceImpl implements ITicketBusService {
 
     @Override
     public List<Long> getCost(Long id){
-        return repository.findCostByUserId(id);
+        return repository.findCostByReservationId(id);
     }
 
     private TicketBus from(CreateTicketBusRequest request){

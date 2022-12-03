@@ -16,5 +16,5 @@ public interface ITicketBusRepository extends JpaRepository<TicketBus, Long> {
     List<TicketBusProjection> findTicketsByDestination(Long destinationId);
 
     @Query(value = "SELECT cost FROM tickets_buses WHERE reservation_id = :id ;", nativeQuery = true)
-    List<Long> findCostByUserId(Long id);
+    List<Long> findCostByReservationId(Long id);
 }

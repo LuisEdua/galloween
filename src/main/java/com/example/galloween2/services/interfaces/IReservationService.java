@@ -11,7 +11,7 @@ public interface IReservationService {
 
     List<CreateReservationResponse> list(Long id);
 
-    Long update(Long id);
+    Long getCost(Long id);
 
     void delete(Long id);
 

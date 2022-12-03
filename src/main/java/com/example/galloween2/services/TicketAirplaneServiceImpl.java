@@ -70,7 +70,7 @@ public class TicketAirplaneServiceImpl implements ITicketAirplaneService {
 
     @Override
     public List<Long> getCost(Long id) {
-        return repository.findCostByUserId(id);
+        return repository.findCostByReservation(id);
     }
 
     private TicketAirplane from(CreateTicketAirplaneRequest request){

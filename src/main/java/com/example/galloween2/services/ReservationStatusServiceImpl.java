@@ -35,7 +35,7 @@ public class ReservationStatusServiceImpl implements IReservationStatusService {
 
     @Override
     public CreateReservationStatusResponse update(Long id, CreateReservationStatusRequest request) {
-        ReservationStatus reservationStatus = findAndEnsureExist(id);
+        ReservationStatus reservationStatus = repository.findByReservationId(id);
         reservationStatus.setStatus(request.getStatus());
         reservationStatus.setPayment(paymentService.findById(request.getPayment()));
         return from(repository.save(reservationStatus));

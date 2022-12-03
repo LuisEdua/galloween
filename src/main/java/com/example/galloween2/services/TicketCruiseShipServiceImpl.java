@@ -70,7 +70,7 @@ public class TicketCruiseShipServiceImpl implements ITicketCruiseShipService {
 
     @Override
     public List<Long> getCost(Long id) {
-        return repository.findCostByUserId(id);
+        return repository.findCostByReservationId(id);
     }
 
     private TicketCruiseShip from(CreateTicketCruiseShipRequest request){

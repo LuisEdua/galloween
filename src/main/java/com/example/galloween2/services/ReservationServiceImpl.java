@@ -54,7 +54,7 @@ public class ReservationServiceImpl implements IReservationService {
     }
 
     @Override
-    public Long update(Long id) {
+    public Long getCost(Long id) {
         Long cost = Long.valueOf(0);
         cost += getCostBus(id);
         cost += getCostAirplane(id);
