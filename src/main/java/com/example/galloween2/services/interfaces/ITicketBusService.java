@@ -17,4 +17,8 @@ public interface ITicketBusService {
     void delete(Long id);
 
     List<Long> getCost(Long id);
+
+    List<CreateTicketBusResponse> getTicket(Long id);
+
+    void toNull(Long id);
 }

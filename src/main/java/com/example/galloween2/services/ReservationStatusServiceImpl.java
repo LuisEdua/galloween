@@ -5,8 +5,7 @@ import com.example.galloween2.controllers.dtos.responses.CreateReservationStatus
 import com.example.galloween2.entities.Reservation;
 import com.example.galloween2.entities.ReservationStatus;
 import com.example.galloween2.repositories.IReservationStatusRepository;
-import com.example.galloween2.services.interfaces.IPaymentService;
-import com.example.galloween2.services.interfaces.IReservationStatusService;
+import com.example.galloween2.services.interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +19,15 @@ public class ReservationStatusServiceImpl implements IReservationStatusService {
 
     @Autowired
     private IPaymentService paymentService;
+
+    @Autowired
+    private ITicketAirplaneService ticketAirplaneService;
+
+    @Autowired
+    private ITicketCruiseShipService cruiseShipService;
+
+    @Autowired
+    private ITicketBusService busService;
 
     @Override
     public CreateReservationStatusResponse create(Reservation reservation) {
@@ -57,6 +65,24 @@ public class ReservationStatusServiceImpl implements IReservationStatusService {
         return from(repository.findByReservationId(idReservation));
     }
 
+    @Override
+    public void updateAirplane(Long id) {
+        repository.findByReservationId(id).setStatus("Cancelled");
+        ticketAirplaneService.toNull(id);
+    }
+
+    @Override
+    public void updateCruiceShip(Long id) {
+        repository.findByReservationId(id).setStatus("Cancelled");
+        cruiseShipService.toNull(id);
+    }
+
+    @Override
+    public void updateBus(Long id) {
+        repository.findByReservationId(id).setStatus("Cancelled");
+        busService.toNull(id);
+    }
+
     private ReservationStatus toNull(ReservationStatus status) {
         status.setPayment(null);
         return repository.save(status);
@@ -64,7 +90,7 @@ public class ReservationStatusServiceImpl implements IReservationStatusService {
 
     private ReservationStatus from(Reservation reservation){
         ReservationStatus reservationStatus = new ReservationStatus();
-        reservationStatus.setStatus("No pagado");
+        reservationStatus.setStatus("Not payed");
         reservationStatus.setReservation(reservation);
         return reservationStatus;
     }

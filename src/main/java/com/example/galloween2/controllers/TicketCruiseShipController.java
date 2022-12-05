@@ -30,6 +30,11 @@ public class TicketCruiseShipController {
         return service.list();
     }
 
+    @GetMapping("reservation/{id}")
+    public List<CreateTicketCruiseShipResponse> getTicket(@PathVariable Long id){
+        return service.getTicket(id);
+    }
+
     @PutMapping("{id}/{idReservation}")
     public CreateTicketCruiseShipResponse update(@PathVariable Long id, @PathVariable Long idReservation) {
         return service.update(id, idReservation);

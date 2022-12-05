@@ -8,7 +8,7 @@ public class CreateTicketBusResponse {
     private Long id;
     private String departureDate;
     private Long seatNumber;
-    private String class_type;
+    private String classType;
     private String origin;
     private String checkInTime;
     private Long cost;

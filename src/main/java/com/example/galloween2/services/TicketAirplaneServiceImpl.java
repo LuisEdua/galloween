@@ -73,6 +73,22 @@ public class TicketAirplaneServiceImpl implements ITicketAirplaneService {
         return repository.findCostByReservation(id);
     }
 
+    @Override
+    public List<CreateTicketAirplaneResponse> getTicket(Long id) {
+        return repository.findByReservationId(id).stream().map(this::from).collect(Collectors.toList());
+    }
+
+    @Override
+    public void toNull(Long id) {
+        repository.findByReservationId(id).stream().map(this::reservationNull).collect(Collectors.toList());
+    }
+
+    private TicketAirplane reservationNull(TicketAirplane ticketAirplane) {
+        ticketAirplane.setReservation(null);
+        return repository.save(ticketAirplane);
+    }
+
+
     private TicketAirplane from(CreateTicketAirplaneRequest request){
         TicketAirplane ticketAirplane = new TicketAirplane();
         ticketAirplane.setDepartureDate(request.getDepartureDate());

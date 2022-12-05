@@ -44,7 +44,7 @@ public class TicketCruiseShipServiceImpl implements ITicketCruiseShipService {
         response.setDepartureDate(ticket.getDeparture_date());
         response.setCheckInTime(ticket.getCheck_in_time());
         response.setSeatNumber(ticket.getSeat_number());
-        response.setClass_type(ticket.getClass_type());
+        response.setClassType(ticket.getClass_type());
         response.setCost(ticket.getCost());
         return response;
     }
@@ -73,6 +73,21 @@ public class TicketCruiseShipServiceImpl implements ITicketCruiseShipService {
         return repository.findCostByReservationId(id);
     }
 
+    @Override
+    public List<CreateTicketCruiseShipResponse> getTicket(Long id) {
+        return repository.findByReservationId(id).stream().map(this::from).collect(Collectors.toList());
+    }
+
+    @Override
+    public void toNull(Long id) {
+        repository.findByReservationId(id).stream().map(this::ticketNull).collect(Collectors.toList());
+    }
+
+    private TicketCruiseShip ticketNull(TicketCruiseShip ticketCruiseShip) {
+        ticketCruiseShip.setReservation(null);
+        return repository.save(ticketCruiseShip);
+    }
+
     private TicketCruiseShip from(CreateTicketCruiseShipRequest request){
         TicketCruiseShip ticketCruiseShip = new TicketCruiseShip();
         ticketCruiseShip.setDepartureDate(request.getDepartureDate());
@@ -91,7 +106,7 @@ public class TicketCruiseShipServiceImpl implements ITicketCruiseShipService {
         response.setDepartureDate(ticketCruiseShip.getDepartureDate());
         response.setCheckInTime(ticketCruiseShip.getCheckInTime());
         response.setOrigin(ticketCruiseShip.getOrigin());
-        response.setClass_type(ticketCruiseShip.getClass_type());
+        response.setClassType(ticketCruiseShip.getClass_type());
         response.setSeatNumber(ticketCruiseShip.getSeatNumber());
         response.setCost(ticketCruiseShip.getCost());
         return response;

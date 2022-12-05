@@ -17,4 +17,8 @@ public interface ITicketCruiseShipService {
     void delete(Long id);
 
     List<Long> getCost(Long id);
+
+    List<CreateTicketCruiseShipResponse> getTicket(Long id);
+
+    void toNull(Long id);
 }

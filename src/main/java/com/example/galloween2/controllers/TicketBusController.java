@@ -25,6 +25,11 @@ public class TicketBusController {
         return service.get(idDestination);
     }
 
+    @GetMapping("reservation/{id}")
+    public List<CreateTicketBusResponse> getTicket(@PathVariable Long id){
+        return service.getTicket(id);
+    }
+
     @GetMapping
     public List<CreateTicketBusResponse> list() {
         return service.list();

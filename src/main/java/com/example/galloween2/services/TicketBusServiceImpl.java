@@ -42,7 +42,7 @@ public class TicketBusServiceImpl implements ITicketBusService {
         response.setDepartureDate(ticketBus.getDeparture_date());
         response.setCheckInTime(ticketBus.getCheck_in_time());
         response.setOrigin(ticketBus.getOrigin());
-        response.setClass_type(ticketBus.getClass_type());
+        response.setClassType(ticketBus.getClass_type());
         response.setSeatNumber(ticketBus.getSeat_number());
         response.setCost(ticketBus.getCost());
         return response;
@@ -72,6 +72,21 @@ public class TicketBusServiceImpl implements ITicketBusService {
         return repository.findCostByReservationId(id);
     }
 
+    @Override
+    public List<CreateTicketBusResponse> getTicket(Long id) {
+        return repository.findByReservationId(id).stream().map(this::from).collect(Collectors.toList());
+    }
+
+    @Override
+    public void toNull(Long id) {
+        repository.findByReservationId(id).stream().map(this::ticketNull).collect(Collectors.toList());
+    }
+
+    private TicketBus  ticketNull(TicketBus ticketBus) {
+        ticketBus.setReservation(null);
+        return repository.save(ticketBus);
+    }
+
     private TicketBus from(CreateTicketBusRequest request){
         TicketBus ticketBus = new TicketBus();
         ticketBus.setCheckInTime(request.getCheckInTime());
@@ -90,7 +105,7 @@ public class TicketBusServiceImpl implements ITicketBusService {
         response.setDepartureDate(ticketBus.getDepartureDate());
         response.setCheckInTime(ticketBus.getCheckInTime());
         response.setOrigin(ticketBus.getOrigin());
-        response.setClass_type(ticketBus.getClass_type());
+        response.setClassType(ticketBus.getClass_type());
         response.setSeatNumber(ticketBus.getSeatNumber());
         response.setCost(ticketBus.getCost());
         return response;

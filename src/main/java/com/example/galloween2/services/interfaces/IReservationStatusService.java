@@ -18,4 +18,10 @@ public interface IReservationStatusService {
     void nullPayment(Long id);
 
     CreateReservationStatusResponse get(Long idReservation);
+
+    void updateAirplane(Long id);
+
+    void updateCruiceShip(Long id);
+
+    void updateBus(Long id);
 }

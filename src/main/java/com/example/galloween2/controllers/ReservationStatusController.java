@@ -20,6 +20,21 @@ public class ReservationStatusController {
         return service.get(idReservation);
     }
 
+    @PutMapping("airplane/{id}")
+    public void updateAirplane (@PathVariable Long id){
+        service.updateAirplane(id);
+    }
+
+    @PutMapping("cruice-ship/{id}")
+    public void updateCruiceShip (@PathVariable Long id){
+        service.updateCruiceShip(id);
+    }
+
+    @PutMapping("bus/{id}")
+    public void updateBus(@PathVariable Long id){
+        service.updateBus(id);
+    }
+
     @PutMapping("{id}")
     public CreateReservationStatusResponse update(@PathVariable Long id, @RequestBody CreateReservationStatusRequest request) {
         return service.update(id, request);

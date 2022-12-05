@@ -25,6 +25,11 @@ public class TicketAirplaneController {
         return service.get(destinationId);
     }
 
+    @GetMapping("reservation/{id}")
+    public List<CreateTicketAirplaneResponse> getTicket(@PathVariable Long id){
+        return service.getTicket(id);
+    }
+
     @GetMapping
     public List<CreateTicketAirplaneResponse> list() {
         return service.list();
